@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>瑶寨文化展示</title>
+  <link rel="preload" as="image" href="assets/village-cover.webp" fetchpriority="high">
   <style>
     :root {
       --paper: #f7f4ee;
@@ -142,7 +143,7 @@
     #detail-view.theme-village {
       background:
         linear-gradient(180deg, rgba(247, 244, 238, 0.98) 0%, rgba(247, 244, 238, 0.98) 58%, rgba(247, 244, 238, 0.88) 74%, rgba(247, 244, 238, 0.38) 100%),
-        url("assets/village-panorama.jpg") center bottom / cover no-repeat;
+        url("assets/village-panorama.webp") center bottom / cover no-repeat;
     }
 
     .section-head {
@@ -195,7 +196,7 @@
       background:
         linear-gradient(180deg, rgba(10, 23, 36, 0.24), rgba(10, 23, 36, 0.72)),
         radial-gradient(circle at 72% 24%, rgba(255, 255, 255, 0.12), transparent 20%),
-        url("assets/village-cover.jpg") center / cover no-repeat,
+        url("assets/village-cover.webp") center / cover no-repeat,
         linear-gradient(160deg, #11273f 0%, #1A3A5C 38%, #284f74 100%);
       color: #f6f7fb;
       box-shadow: var(--hero-shadow);
@@ -921,7 +922,7 @@
         soft: '#e8f0df',
         badge: '山寨风貌',
         summary: '南岗千年瑶寨地处连南县城西南方向约 26 公里，属于三排镇，总面积 359 亩，海拔 808 米，始建于宋代，至今已有一千多年历史。',
-        coverImage: 'assets/village-street.jpg',
+        coverImage: 'assets/village-street.webp',
         coverText: '古寨依山而建，房屋层叠错落，现仍保留明清古建筑 398 幢、留存房间 999 间。石板道纵横交错，主次分明，山地聚落的空间脉络至今仍然清晰可见。',
         meta: ['千年古寨', '依山而建', '明清民居'],
         intro: '先看历史与格局，再看空间与生活。',
@@ -929,19 +930,19 @@
           {
             title: '历史与规模',
             text: '南岗千年瑶寨始建于宋代，已有一千多年历史，寨子总面积 359 亩，海拔 808 米。这些数字把古寨的年代、尺度和山地位置都落到了具体坐标里。',
-            image: 'assets/village-panorama.jpg',
+            image: 'assets/village-panorama.webp',
             alt: '从瑶寨高处望向群山与屋面的视角'
           },
           {
             title: '依山而建的格局',
             text: '古寨最鲜明的特点是顺山势铺展开来：房屋层层叠叠，石板道纵横交错，主次分明。寨中保存下来的明清古建筑和大量房间，也让这种层递式的空间关系至今仍然看得见。',
-            image: 'assets/village-street.jpg',
+            image: 'assets/village-street.webp',
             alt: '从高处俯看瑶寨街巷与层叠屋舍'
           },
           {
             title: '文化名片',
             text: '南岗千年瑶寨被誉为“世界瑶族第一寨”，并先后获得“中国历史文化名村”“中国民间艺术之乡”“中国十大最美村镇”等称号，2014 年 12 月被评为国家 AAAA 级旅游景区。',
-            image: 'assets/village-wish-tree.jpg',
+            image: 'assets/village-wish-tree.webp',
             alt: '瑶寨景区中的红绸祈愿树'
           }
         ],
@@ -964,7 +965,7 @@
         soft: '#f5e6dc',
         badge: '排瑶手鼓',
         summary: '排瑶手鼓起源于瑶族排瑶长鼓，借鉴了长鼓修长的外形，并在此基础上继续改良，形成了更适合展示与演奏的当代表达。',
-        coverImage: 'assets/drum-close.jpg',
+        coverImage: 'assets/drum-close.webp',
         coverText: '排瑶手鼓不仅保留了长鼓的形态特征，还加入了独特的调音器以及当地特有的原生态鼓韵律，因此能形成不同的高低音效果，这也是它区别于其他鼓类的重要特点。',
         meta: ['起源改良', '调音结构', '衍生产品'],
         intro: '先看它从哪里来，再看它为什么听起来不一样。',
@@ -972,19 +973,19 @@
           {
             title: '从长鼓延伸出的新器物',
             text: '排瑶手鼓并不是凭空出现的器物。它起源于排瑶长鼓，在长鼓原有外形基础上进行改良，因此可以把它理解为“从传统舞鼓走向当代展示”的延伸。',
-            image: 'assets/drum-board.jpg',
+            image: 'assets/drum-board.webp',
             alt: '排瑶手鼓说明展板'
           },
           {
             title: '声音与工艺',
             text: '排瑶手鼓具有独特的调音器，也融入了当地原生态鼓韵律，因此能够实现不同的高低音效果。这一段最适合解释它为什么“不是普通的鼓”。',
-            image: 'assets/drum-scene.jpg',
+            image: 'assets/drum-scene.webp',
             alt: '瑶寨里背着手鼓行进的孩童'
           },
           {
             title: '当代发展',
             text: '排瑶手鼓的制作工艺要求很高，经过多年潜心研究，已经开发出多个品类，包括通俗版、精品版、旅游工艺品和手信系列，并已获得国家专利，成为展示瑶族文化的重要代表作之一。',
-            image: 'assets/super-big-drum.jpg',
+            image: 'assets/super-big-drum.webp',
             alt: '排瑶手鼓近景'
           }
         ],
@@ -1006,7 +1007,7 @@
         soft: '#e3ebf4',
         badge: '靛蓝染艺',
         summary: '扎染古称扎缬、绞缬，是中国民间传统染色工艺，也是我国古代三大印花技艺之一。',
-        coverImage: 'assets/dye-title.jpg',
+        coverImage: 'assets/dye-title.webp',
         coverText: '',
         coverMode: 'full-bleed',
         meta: ['扎缬工艺', '天然染液', '蓝白纹样'],
@@ -1015,19 +1016,19 @@
           {
             title: '从扎缬到扎染',
             text: '扎染古称扎缬、绞缬，是中国民间传统而独特的染色工艺，也是我国古代三大印花技艺之一。这一页先从工艺本身展开，而不只把它当作一种颜色风格。',
-            image: 'assets/dye-poster.jpg',
+            image: 'assets/dye-poster.webp',
             alt: '扎染海报中的标题局部'
           },
           {
             title: '先扎后染的形成逻辑',
             text: '瑶族扎染不是直接涂色，而是先用白棉线在白棉布上依照花纹样进行针绣扎结、压挑，再把处理好的布料投入天然植物染液中反复煮染。正因为先有扎结和压挑，拆线之后才会保留下清晰的留白纹样。',
-            image: 'assets/zaran2.jpg',
+            image: 'assets/zaran2.webp',
             alt: '扎染海报中的纹样与标题局部'
           },
           {
             title: '蓝底白花的视觉完成',
             text: '蓝色会在反复煮染中逐层加深，晾干拆线之后，布面形成白花蓝黑底的对比，纹样像自然长出来一样。真正能把这道工艺讲完整的，仍然是布料肌理、折痕和晕染层次都清楚的实物图。',
-            image: 'assets/zaran1.jpg',
+            image: 'assets/zaran1.webp',
             alt: '扎染海报中的蓝白布面局部'
           }
         ]
@@ -1040,7 +1041,7 @@
         soft: '#f6e3dd',
         badge: '纹样与针法',
         summary: '瑶绣是瑶族妇女用手工在靛蓝色布面上进行挑花、正面刺绣形成的传统手工艺之一，已有一千余年历史。',
-        coverImage: 'assets/embroider-board.jpg',
+        coverImage: 'assets/embroider-board.webp',
         coverText: '瑶绣以靛蓝底布、挑花、正面刺绣和延续千年的手工传统构成最鲜明的面貌，纹样、针脚和配色共同决定了它的辨识度。',
         meta: ['靛蓝底布', '挑花刺绣', '千年手工'],
         intro: '先让人看到纹样，再让人知道它怎么绣出来。',
@@ -1048,19 +1049,19 @@
           {
             title: '靛蓝布上的针线工艺',
             text: '瑶绣并不是在成衣上随手加花，而是以靛蓝色布面为底，用手工进行挑花和正面刺绣。也正因为底布颜色沉稳，图案的红、黄、粉、白才会更鲜明地跳出来。',
-            image: 'assets/embroider-hat.jpg',
+            image: 'assets/embroider-hat.webp',
             alt: '绣有几何纹样的头饰细节'
           },
           {
             title: '从近处看纹样',
             text: '瑶绣很强调几何分格、花形重复和边框层层推进。观看重点落在针脚、色块和图案秩序上，比泛泛谈论更能看出这门手工艺的细致。',
-            image: 'assets/embroider-hang-2-16x9.jpg',
+            image: 'assets/embroider-hang-2-16x9.webp',
             alt: '瑶绣挂卡上的几何纹样细节'
           },
           {
             title: '延续至今的传统手工艺',
             text: '瑶绣已有一千余年历史，是瑶族传统手工艺之一。它留下来的不只是图案本身，也是一整套通过手工将颜色、布料和纹样组织在一起的方式。',
-            image: 'assets/embroider-pattern-16x9.jpg',
+            image: 'assets/embroider-pattern-16x9.webp',
             alt: '瑶绣方形图案的刺绣细节'
           }
         ],
@@ -1082,7 +1083,7 @@
         soft: '#f3e5d3',
         badge: '动作与场面',
         summary: '瑶族长鼓舞在 2008 年 6 月被列入第二批国家级非物质文化遗产代表性项目名录，是排瑶人民世代相传的民间传统舞蹈。',
-        coverImage: 'assets/dance-cover.jpg',
+        coverImage: 'assets/dance-cover.webp',
         coverText: '长鼓舞常见于春节、三月三、十月十六盘王节、耍歌堂等喜庆场合。长鼓约四尺长，鼓身细长、两头较大，呈喇叭状，用沙桐木制成，两端蒙牛皮或羊皮作鼓面。',
         meta: ['节庆舞蹈', '长鼓形制', '表演动作'],
         intro: '先交代场合，再解释长鼓，最后回到舞步与气势。',
@@ -1090,19 +1091,19 @@
           {
             title: '节庆中的长鼓舞',
             text: '长鼓舞并不是孤立表演，而是和瑶族重要节庆与歌堂活动密切相关。这一页首先呈现的是它出现在哪里，再回到动作和鼓法本身。',
-            image: 'assets/dance-poster-crop-1.jpg',
+            image: 'assets/dance-poster-crop-1.webp',
             alt: '长鼓舞海报中的人物与鼓面局部'
           },
           {
             title: '长鼓与打法',
             text: '长鼓的形制和打法也很鲜明：舞时长鼓横挂胸腹间，右手五指并拢，以掌拍鼓，左手持竹片敲打鼓面，能发出鲜明而有穿透力的节奏。表演形式则有单人舞、双人舞和群舞。',
-            image: 'assets/drum-scene.jpg',
+            image: 'assets/drum-scene.webp',
             alt: '长鼓舞海报中的长鼓与人物动作局部'
           },
           {
             title: '刚劲粗犷的气质',
             text: '长鼓舞的动作风格非常鲜明：舞蹈刚劲有力，粗犷洒脱，时而腾空旋转，时而如猛虎扑地。尤其双人表演，常被形容为两虎相斗、双龙戏珠，把瑶族人民勤劳勇敢、雄劲刚强的性格表现得淋漓尽致。',
-            image: 'assets/长鼓舞1.jpg',
+            image: 'assets/长鼓舞1.webp',
             alt: '长鼓舞海报中的动态造型局部'
           }
         ],
@@ -1124,7 +1125,7 @@
         soft: '#FBF2D9',
         badge: '瑶山风物',
         summary: '瑶山田埂山山孕育出独具特色的风物，从南瓜面、丝苗米、花生油到草本洗护，每一份都带着瑶山的山水气息。',
-        coverImage: 'assets/specialty-grape.jpg',
+        coverImage: 'assets/specialty-grape.webp',
         coverText: '从田间到餐桌，再从草本到日常洗护，把山里的味道与手艺完整保留下来。',
         meta: ['瑶山风物', '米面粮油', '草本洗护'],
         intro: '先看主食与粮油，再看鲜果特产与草本工艺。',
@@ -1132,43 +1133,43 @@
           {
             title: '南瓜面：一碗瑶山风味',
             text: '以瑶山自种南瓜与小麦粉调和制成，汤色金黄、面条筋道，是瑶山风物中最具代表性的特产伴手礼之一。',
-            image: 'assets/specialty-pumpkin-noodle.jpg',
+            image: 'assets/specialty-pumpkin-noodle.webp',
             alt: '南瓜面礼盒包装'
           },
           {
             title: '丝苗米：田埂山山，十里稻香',
             text: '产自瑶山梯田的丝苗米，米粒细长、米香浓郁，煮出的饭软滑有嚼劲，是瑶家人餐桌上最日常的主食。',
-            image: 'assets/specialty-rice.jpg',
+            image: 'assets/specialty-rice.webp',
             alt: '丝苗米袋装包装'
           },
           {
             title: '花生油：古法压榨的香浓',
             text: '古法压榨的花生油色泽金黄、香气浓郁，承载着瑶山农户代代相传的榨油手艺，香浓好滋味，健康每一天。',
-            image: 'assets/specialty-peanut-oil.jpg',
+            image: 'assets/specialty-peanut-oil.webp',
             alt: '花生油瓶身'
           },
           {
             title: '排瑶葡萄：三果同盒，鲜摘直达',
             text: '生长在高山果园的排瑶葡萄，皮薄肉脆、入口香浓，三果同盒、鲜摘直达，是节日送礼与日常尝鲜都合适的选择。',
-            image: 'assets/specialty-grape.jpg',
+            image: 'assets/specialty-grape.webp',
             alt: '排瑶葡萄礼盒'
           },
           {
             title: '植露草本：山中草本洗护',
             text: '瑶族自古善用山中草本，植露草本原浆洗护系列以本地草药为基底，温和滋养，把瑶山的草木气息带进日常。',
-            image: 'assets/specialty-herbal-shop.jpg',
+            image: 'assets/specialty-herbal-shop.webp',
             alt: '植露草本洗护产品店铺'
           },
           {
             title: '米面晾晒：竹竿上的传统',
             text: '长长的米面挂在竹竿上自然晾晒，阳光和山风慢慢带走水分，也把米香一点点锁进面身，是瑶寨常见的风物场景。',
-            image: 'assets/specialty-noodle-drying.jpg',
+            image: 'assets/specialty-noodle-drying.webp',
             alt: '竹竿上晾晒的米面'
           },
           {
             title: '腐竹制作：木槽里的手艺',
             text: '豆香浓郁的腐竹沿用木槽手工制作的传统工艺，从磨浆、煮浆到挑皮、晾晒全靠手上功夫，是瑶山豆制品的代表。',
-            image: 'assets/specialty-tofu-workshop.jpg',
+            image: 'assets/specialty-tofu-workshop.webp',
             alt: '腐竹制作作坊'
           }
         ],
@@ -1191,7 +1192,7 @@
         emoji: '⛰️',
         color: '#6F8E58',
         soft: '#e8f0df',
-        image: 'assets/village-street.jpg'
+        image: 'assets/village-street.webp'
       },
       {
         id: 'drum',
@@ -1200,7 +1201,7 @@
         emoji: '🥁',
         color: '#C0723C',
         soft: '#f5e6dc',
-        image: 'assets/drum-close.jpg'
+        image: 'assets/drum-close.webp'
       },
       {
         id: 'dye',
@@ -1209,7 +1210,7 @@
         emoji: '🎨',
         color: '#1A3A5C',
         soft: '#e3ebf4',
-        image: 'assets/dye-title.jpg'
+        image: 'assets/dye-title.webp'
       },
       {
         id: 'embroider',
@@ -1218,7 +1219,7 @@
         emoji: '🧵',
         color: '#C23B22',
         soft: '#f6e3dd',
-        image: 'assets/embroider-hat.jpg'
+        image: 'assets/embroider-hat.webp'
       },
       {
         id: 'dance',
@@ -1227,7 +1228,7 @@
         emoji: '✨',
         color: '#8B5A2B',
         soft: '#f3e5d3',
-        image: 'assets/dance-cover.jpg'
+        image: 'assets/dance-cover.webp'
       },
       {
         id: 'life',
@@ -1236,7 +1237,7 @@
         emoji: '🛍️',
         color: '#D4A017',
         soft: '#FBF2D9',
-        image: 'assets/specialty-grape.jpg'
+        image: 'assets/specialty-grape.webp'
       }
     ];
 
@@ -1261,13 +1262,28 @@
     let isTransitioning = false;
 
     function resizeCanvas() {
-      canvas.width = window.innerWidth * window.devicePixelRatio;
-      canvas.height = window.innerHeight * window.devicePixelRatio;
-      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = window.innerWidth * ratio;
+      canvas.height = window.innerHeight * ratio;
+      ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
     }
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', () => { if (isTransitioning) resizeCanvas(); });
+
+
+    let imageObserver;
+    function loadVisibleImages(root) {
+      imageObserver?.disconnect();
+      const images = root.querySelectorAll('img[data-src]');
+      const load = (img) => { img.src = img.dataset.src; img.removeAttribute('data-src'); };
+      if (!('IntersectionObserver' in window)) { images.forEach(load); return; }
+      imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) { load(entry.target); imageObserver.unobserve(entry.target); }
+        });
+      }, { rootMargin: '120px 0px' });
+      images.forEach((img) => imageObserver.observe(img));
+    }
 
     function renderHome() {
       featureGrid.innerHTML = homeModules.map((item, index) => `
@@ -1283,7 +1299,7 @@
             <div class="feature-index">${String(index + 1).padStart(2, '0')}</div>
           </div>
           <div class="feature-thumb ${item.image ? 'has-image' : ''}" aria-hidden="true">
-            ${item.image ? `<img class="${item.imageClass || ''}" src="${item.image}" alt="" loading="lazy">` : ''}
+            ${item.image ? `<img class="${item.imageClass || ''}" data-src="${item.image.replace(/\.webp$/, '-thumb.webp')}" alt="" decoding="async">` : ''}
           </div>
           <h3>${item.title}</h3>
           ${item.summary ? `<p>${item.summary}</p>` : ''}
@@ -1340,7 +1356,7 @@
             ${data.badge ? `<span class="meta-chip">${data.badge}</span>` : ''}
           </div>
           <div class="detail-placeholder ${cardImage ? 'has-image' : ''}" aria-hidden="true">
-            ${cardImage ? `<img class="${cardImageClass}" src="${cardImage}" alt="${cardAlt}" loading="lazy">` : ''}
+            ${cardImage ? `<img class="${cardImageClass}" data-src="${cardImage}" alt="${cardAlt}" decoding="async">` : ''}
           </div>
           ${card.title ? `<h3>${card.title}</h3>` : ''}
           ${card.text ? `<p>${card.text}</p>` : ''}
@@ -1369,6 +1385,7 @@
       homeView.classList.toggle('active', isHome);
       detailView.classList.toggle('active', !isHome);
       activePage = page;
+      loadVisibleImages(isHome ? homeView : detailView);
       updateNav(page);
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
@@ -1389,6 +1406,7 @@
       if (isTransitioning) {
         return;
       }
+      resizeCanvas();
       isTransitioning = true;
       overlay.classList.add('active');
       overlay.style.background = 'transparent';
