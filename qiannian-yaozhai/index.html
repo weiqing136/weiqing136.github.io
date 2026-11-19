@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>瑶寨文化展示</title>
+  <style>
+    :root {
+      --paper: #f7f4ee;
+      --paper-soft: #fbf9f3;
+      --surface: #fffdf8;
+      --surface-2: #f3efe4;
+      --ink: #20261f;
+      --muted: #6c7468;
+      --line: rgba(48, 59, 44, 0.12);
+      --shadow: 0 14px 34px rgba(34, 42, 29, 0.1);
+      --hero-shadow: 0 20px 40px rgba(16, 25, 35, 0.16);
+      --title-font: "STKaiti", "华文楷体", "Kaiti SC", "KaiTi", "楷体", serif;
+
+      --drum: #C0723C;
+      --drum-soft: #f5e6dc;
+      --dye: #1A3A5C;
+      --dye-soft: #e3ebf4;
+      --embroider: #C23B22;
+      --embroider-soft: #f6e3dd;
+      --dance: #8B5A2B;
+      --dance-soft: #f3e5d3;
+      --life: #D4A017;
+      --life-soft: #FBF2D9;
+      --village: #6C8A43;
+      --village-soft: #e8f0da;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--paper);
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    button,
+    a {
+      color: inherit;
+      font: inherit;
+    }
+
+    button {
+      border: 0;
+      background: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      background: rgba(20, 24, 26, 0.78);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 14px 16px 12px;
+      scrollbar-width: none;
+      max-width: 430px;
+      margin: 0 auto;
+    }
+
+    .nav-inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-link {
+      position: relative;
+      flex: 0 0 auto;
+      color: rgba(255, 250, 243, 0.8);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--title-font);
+      letter-spacing: 0.02em;
+      padding-bottom: 8px;
+      text-decoration: none;
+    }
+
+    .nav-link.active {
+      color: #fff;
+    }
+
+    .nav-link.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--nav-accent, #fff);
+    }
+
+    .app-shell {
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background:
+        linear-gradient(180deg, #fbf9f4 0%, #f7f4ee 20%, #f3efe4 100%);
+      box-shadow: 0 0 0 1px rgba(70, 80, 67, 0.03);
+      position: relative;
+    }
+
+    .view {
+      display: none;
+      min-height: 100vh;
+      padding: 68px 16px 28px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 260ms ease, transform 260ms ease;
+    }
+
+    .view.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #detail-view.theme-village {
+      background:
+        linear-gradient(180deg, rgba(247, 244, 238, 0.98) 0%, rgba(247, 244, 238, 0.98) 58%, rgba(247, 244, 238, 0.88) 74%, rgba(247, 244, 238, 0.38) 100%),
+        url("assets/village-panorama.jpg") center bottom / cover no-repeat;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-head h2,
+    .section-head p,
+    .hero-copy h1,
+    .hero-copy p,
+    .summary-strip p,
+    .feature-card h3,
+    .feature-card p,
+    .topic-panel h3,
+    .topic-panel p,
+    .detail-top h1,
+    .detail-top p,
+    .detail-card h3,
+    .detail-card p,
+    .need-block h3,
+    .need-block p,
+    .aside-card h3,
+    .aside-card p {
+      margin: 0;
+    }
+
+    .section-head h2 {
+      font-size: 20px;
+      line-height: 1.2;
+      font-family: var(--title-font);
+      font-weight: 700;
+    }
+
+    .section-head p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 250px;
+      border-radius: 26px;
+      padding: 22px;
+      margin-bottom: 18px;
+      background:
+        linear-gradient(180deg, rgba(10, 23, 36, 0.24), rgba(10, 23, 36, 0.72)),
+        radial-gradient(circle at 72% 24%, rgba(255, 255, 255, 0.12), transparent 20%),
+        url("assets/village-cover.jpg") center / cover no-repeat,
+        linear-gradient(160deg, #11273f 0%, #1A3A5C 38%, #284f74 100%);
+      color: #f6f7fb;
+      box-shadow: var(--hero-shadow);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -22% -10%;
+      height: 54%;
+      background:
+        radial-gradient(circle at 18% 70%, rgba(255, 255, 255, 0.1), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+      opacity: 0.8;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -2%;
+      top: 12%;
+      width: 42%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0) 70%);
+      filter: blur(4px);
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 12px;
+      max-width: 72%;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: 12px;
+      font-family: var(--title-font);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    .hero-copy h1 {
+      font-size: 30px;
+      line-height: 1.15;
+      font-family: var(--title-font);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-title {
+      display: block;
+      width: auto;
+      margin: 0;
+      font-family: var(--title-font);
+      font-size: 34px;
+      letter-spacing: 4px;
+      line-height: 1.25;
+      color: #1f3a2e;
+      text-shadow: 0 6px 14px rgba(12, 18, 20, 0.12);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .hero-copy p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(246, 247, 251, 0.86);
+    }
+
+    .hero-tag-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hero-tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      font-size: 12px;
+      font-family: var(--title-font);
+      font-weight: 700;
+    }
+
+    .summary-strip {
+      display: grid;
+      gap: 10px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .summary-strip strong {
+      font-size: 16px;
+      font-family: var(--title-font);
+      font-weight: 700;
+    }
+
+    .summary-strip p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      text-align: left;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .feature-card:active {
+      transform: scale(0.985);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 36px rgba(34, 42, 29, 0.12);
+    }
+
+    .feature-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: var(--theme);
+      opacity: 0.95;
+    }
+
+    .feature-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .feature-emoji {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--soft);
+      font-size: 22px;
+    }
+
+    .feature-index {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .feature-card h3 {
+      font-size: 17px;
+      line-height: 1.25;
+      font-family: var(--title-font);
+      font-weight: 700;
+    }
+
+    .feature-card p {
+      font-size: 13px;
+      line-height: 1.72;
+      color: var(--muted);
+    }
+
+    .feature-thumb {
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      background:
+        linear-gradient(145deg, color-mix(in srgb, var(--theme) 22%, white), color-mix(in srgb, var(--theme) 8%, white)),
+        var(--soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-thumb img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .feature-thumb img.fit-contain,
+    .detail-placeholder img.fit-contain {
+      object-fit: contain;
+      background: color-mix(in srgb, var(--theme) 8%, #f7f4ee);
+    }
+
+    .feature-thumb.has-image::before,
+    .feature-thumb.has-image::after {
+      display: none;
+    }
+
+    .feature-thumb::before,
+    .feature-thumb::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      opacity: 0.46;
+    }
+
+    .feature-thumb::before {
+      inset: auto -8% -22% 12%;
+      height: 62%;
+      background: color-mix(in srgb, var(--theme) 16%, white);
+    }
+
+    .feature-thumb::after {
+      width: 30%;
+      aspect-ratio: 1;
+      right: 10%;
+      top: 20%;
+      background: color-mix(in srgb, var(--theme) 26%, white);
+      filter: blur(2px);
+    }
+
+    .topic-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .topic-panel {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .topic-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .topic-pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .topic-pill {
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--ink);
+      font-size: 12px;
+    }
+
+    .topic-panel h3 {
+      font-size: 17px;
+      font-family: var(--title-font);
+      font-weight: 700;
+    }
+
+    .topic-panel p {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .detail-top {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .back-button {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      font-family: var(--title-font);
+      font-weight: 700;
+    }
+
+    .detail-top h1 {
+      font-size: 28px;
+      line-height: 1.15;
+      font-family: var(--title-font);
+      font-weight: 700;
+    }
+
+    .detail-top p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .detail-cover {
+      position: relative;
+      overflow: hidden;
+      min-height: 210px;
+      border-radius: 24px;
+      margin-bottom: 18px;
+      background: linear-gradient(160deg, var(--theme) 0%, color-mix(in srgb, var(--theme) 72%, white) 100%);
+      box-shadow: var(--hero-shadow);
+      color: #fff;
+    }
+
+    .detail-cover-media {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transform: scale(1.02);
+      transition: opacity 220ms ease;
+    }
+
+    .detail-cover.has-image .detail-cover-media {
+      opacity: 0.64;
+    }
+
+    .detail-cover.media-focus .detail-cover-media {
+      opacity: 0.98;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .detail-cover.full-bleed .detail-cover-media {
+      opacity: 0.98;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .detail-cover::before {
+      content: "";
+      position: absolute;
+      inset: auto -8% -16% -8%;
+      height: 48%;
+      background:
+        radial-gradient(circle at 20% 40%, rgba(255, 255, 255, 0.16), transparent 20%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
+    }
+
+    .detail-cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 18, 26, 0.18), rgba(10, 18, 26, 0.56));
+      opacity: 0;
+      transition: opacity 220ms ease;
+    }
+
+    .detail-cover.has-image::after {
+      opacity: 1;
+    }
+
+    .detail-cover.media-focus::after {
+      opacity: 0;
+    }
+
+    .detail-cover.full-bleed::after {
+      opacity: 0;
+    }
+
+    .detail-cover.media-focus::before {
+      opacity: 0.18;
+    }
+
+    .detail-cover.media-focus .detail-cover-copy {
+      display: none;
+    }
+
+    .detail-cover.full-bleed .detail-cover-copy {
+      display: none;
+    }
+
+    .detail-cover-copy {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 12px;
+      padding: 22px;
+      min-height: 210px;
+      align-content: end;
+    }
+
+    .detail-cover-badge {
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 12px;
+      font-family: var(--title-font);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .detail-cover-title {
+      font-size: 30px;
+      line-height: 1.1;
+      font-family: var(--title-font);
+      font-weight: 700;
+    }
+
+    .detail-cover-text {
+      max-width: 76%;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    .detail-meta-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .meta-chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--theme);
+      font-size: 12px;
+      font-family: var(--title-font);
+      font-weight: 600;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .detail-card {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .detail-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .detail-index {
+      color: var(--theme);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+
+    .detail-card h3 {
+      font-size: 18px;
+      line-height: 1.25;
+      font-family: var(--title-font);
+      font-weight: 700;
+    }
+
+    .detail-card p {
+      font-size: 14px;
+      line-height: 1.82;
+      color: var(--muted);
+    }
+
+    .detail-placeholder {
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+      background:
+        linear-gradient(145deg, color-mix(in srgb, var(--theme) 20%, white), color-mix(in srgb, var(--theme) 8%, white)),
+        var(--soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .detail-placeholder img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .detail-placeholder img.rotate-90 {
+      object-fit: contain;
+      transform: rotate(180deg) scale(1.02);
+      transform-origin: center;
+      background: color-mix(in srgb, var(--theme) 8%, #f7f4ee);
+    }
+
+    .detail-placeholder.has-image::before {
+      display: none;
+    }
+
+    .detail-placeholder::before {
+      content: "";
+      position: absolute;
+      inset: auto 10% -18% -6%;
+      height: 56%;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.32);
+    }
+
+    .need-block,
+    .aside-card {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border-radius: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+
+    .need-block h3,
+    .aside-card h3 {
+      font-size: 17px;
+      font-family: var(--title-font);
+      font-weight: 700;
+    }
+
+    .need-block p,
+    .aside-card p {
+      font-size: 13px;
+      line-height: 1.78;
+      color: var(--muted);
+    }
+
+    .need-list,
+    .aside-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .need-item,
+    .aside-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13px;
+      line-height: 1.72;
+      color: var(--muted);
+    }
+
+    .need-bullet,
+    .aside-bullet {
+      flex: 0 0 24px;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: var(--soft);
+      color: var(--theme);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .bottom-gap {
+      height: 12px;
+    }
+
+    .transition-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 220ms ease;
+      background: transparent;
+    }
+
+    .transition-overlay.active {
+      opacity: 1;
+    }
+
+    .transition-overlay canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    @media (min-width: 431px) {
+      body {
+        background:
+          linear-gradient(180deg, #f5f0e6 0%, #f1ede2 100%);
+      }
+
+      .app-shell {
+        margin: 0 auto;
+        min-height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="主导航">
+    <div class="nav-inner">
+      <a class="nav-link active" href="#home" data-target="home">首页</a>
+      <a class="nav-link" href="#village" data-target="village">千年瑶寨</a>
+      <a class="nav-link" href="#drum" data-target="drum">瑶族手鼓</a>
+      <a class="nav-link" href="#dye" data-target="dye">扎染</a>
+      <a class="nav-link" href="#embroider" data-target="embroider">瑶绣</a>
+      <a class="nav-link" href="#dance" data-target="dance">长鼓舞</a>
+      <a class="nav-link" href="#life" data-target="life">当地特色</a>
+    </div>
+  </nav>
+
+  <div class="app-shell">
+    <main class="view active" id="home-view" aria-labelledby="home-title">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="hero-kicker">南岗千年瑶寨</div>
+          <h1 id="home-title" class="hero-title">千年瑶寨</h1>
+          <p>以真实移动端页面方式梳理瑶寨里最值得展开的几条内容线：器乐、染织、舞蹈与特色风物。</p>
+          <div class="hero-tag-row">
+            <span class="hero-tag">手鼓节奏</span>
+            <span class="hero-tag">蓝靛纹样</span>
+            <span class="hero-tag">长鼓舞步</span>
+            <span class="hero-tag">瑶山风物</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="summary-strip">
+        <strong>Hello，瑶寨你好</strong>
+        <p>从村寨风貌出发，继续走进手鼓、扎染、瑶绣、长鼓舞与当地特色，顺着不同线索看见瑶族文化的生活肌理。</p>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <h2>文化模块</h2>
+          <p>5 条内容线 + 1 个村寨总览</p>
+        </div>
+        <div class="feature-grid" id="feature-grid"></div>
+      </section>
+
+      <div class="bottom-gap"></div>
+    </main>
+
+    <main class="view" id="detail-view" aria-live="polite">
+      <section class="detail-top">
+        <button class="back-button" id="back-home" type="button">← 返回首页</button>
+        <h1 id="detail-title"></h1>
+        <p id="detail-summary"></p>
+      </section>
+
+      <section class="detail-cover" id="detail-cover">
+        <div class="detail-cover-media" id="detail-cover-media" aria-hidden="true"></div>
+        <div class="detail-cover-copy">
+          <span class="detail-cover-badge" id="detail-badge"></span>
+          <div class="detail-cover-title" id="detail-cover-title"></div>
+          <div class="detail-cover-text" id="detail-cover-text"></div>
+        </div>
+      </section>
+
+      <section class="detail-meta-row" id="detail-meta-row"></section>
+      <section class="detail-list" id="detail-list"></section>
+
+      <div class="bottom-gap"></div>
+    </main>
+  </div>
+
+  <div class="transition-overlay" id="transition-overlay" aria-hidden="true">
+    <canvas id="transition-canvas"></canvas>
+  </div>
+
+  <script>
+    const detailData = {
+      village: {
+        title: '千年瑶寨',
+        nav: '千年瑶寨',
+        emoji: '⛰️',
+        color: '#6F8E58',
+        soft: '#e8f0df',
+        badge: '山寨风貌',
+        summary: '南岗千年瑶寨地处连南县城西南方向约 26 公里，属于三排镇，总面积 359 亩，海拔 808 米，始建于宋代，至今已有一千多年历史。',
+        coverImage: 'assets/village-street.jpg',
+        coverText: '古寨依山而建，房屋层叠错落，现仍保留明清古建筑 398 幢、留存房间 999 间。石板道纵横交错，主次分明，山地聚落的空间脉络至今仍然清晰可见。',
+        meta: ['千年古寨', '依山而建', '明清民居'],
+        intro: '先看历史与格局，再看空间与生活。',
+        cards: [
+          {
+            title: '历史与规模',
+            text: '南岗千年瑶寨始建于宋代，已有一千多年历史，寨子总面积 359 亩，海拔 808 米。这些数字把古寨的年代、尺度和山地位置都落到了具体坐标里。',
+            image: 'assets/village-panorama.jpg',
+            alt: '从瑶寨高处望向群山与屋面的视角'
+          },
+          {
+            title: '依山而建的格局',
+            text: '古寨最鲜明的特点是顺山势铺展开来：房屋层层叠叠，石板道纵横交错，主次分明。寨中保存下来的明清古建筑和大量房间，也让这种层递式的空间关系至今仍然看得见。',
+            image: 'assets/village-street.jpg',
+            alt: '从高处俯看瑶寨街巷与层叠屋舍'
+          },
+          {
+            title: '文化名片',
+            text: '南岗千年瑶寨被誉为“世界瑶族第一寨”，并先后获得“中国历史文化名村”“中国民间艺术之乡”“中国十大最美村镇”等称号，2014 年 12 月被评为国家 AAAA 级旅游景区。',
+            image: 'assets/village-wish-tree.jpg',
+            alt: '瑶寨景区中的红绸祈愿树'
+          }
+        ],
+        needs: [
+          '千年瑶寨山顶或高处全景：能看见聚落沿山展开的层次。',
+          '寨门、主路或台阶路径画面：用于说明进入村寨的空间感。',
+          '木构民居中近景：屋檐、墙面、窗格或成片屋面关系。',
+          '带生活痕迹的场景：如晾晒、行走中的游客或村民活动角落。'
+        ],
+        aside: {
+          summary: '现有资料已经足够支撑这一页的基本文字，重点不是再补概念，而是补一张真正能把“依山而建、层叠展开”拍出来的主图。',
+          items: ['封面建议优先用远景大面，先建立空间。', '正文第二段最适合承接路线和民居结构。', '如果后续能补晨雾、层山或斜坡视角，这一页会更完整。']
+        }
+      },
+      drum: {
+        title: '瑶族手鼓',
+        nav: '瑶族手鼓',
+        emoji: '🥁',
+        color: '#C0723C',
+        soft: '#f5e6dc',
+        badge: '排瑶手鼓',
+        summary: '排瑶手鼓起源于瑶族排瑶长鼓，借鉴了长鼓修长的外形，并在此基础上继续改良，形成了更适合展示与演奏的当代表达。',
+        coverImage: 'assets/drum-close.jpg',
+        coverText: '排瑶手鼓不仅保留了长鼓的形态特征，还加入了独特的调音器以及当地特有的原生态鼓韵律，因此能形成不同的高低音效果，这也是它区别于其他鼓类的重要特点。',
+        meta: ['起源改良', '调音结构', '衍生产品'],
+        intro: '先看它从哪里来，再看它为什么听起来不一样。',
+        cards: [
+          {
+            title: '从长鼓延伸出的新器物',
+            text: '排瑶手鼓并不是凭空出现的器物。它起源于排瑶长鼓，在长鼓原有外形基础上进行改良，因此可以把它理解为“从传统舞鼓走向当代展示”的延伸。',
+            image: 'assets/drum-board.jpg',
+            alt: '排瑶手鼓说明展板'
+          },
+          {
+            title: '声音与工艺',
+            text: '排瑶手鼓具有独特的调音器，也融入了当地原生态鼓韵律，因此能够实现不同的高低音效果。这一段最适合解释它为什么“不是普通的鼓”。',
+            image: 'assets/drum-scene.jpg',
+            alt: '瑶寨里背着手鼓行进的孩童'
+          },
+          {
+            title: '当代发展',
+            text: '排瑶手鼓的制作工艺要求很高，经过多年潜心研究，已经开发出多个品类，包括通俗版、精品版、旅游工艺品和手信系列，并已获得国家专利，成为展示瑶族文化的重要代表作之一。',
+            image: 'assets/super-big-drum.jpg',
+            alt: '排瑶手鼓近景'
+          }
+        ],
+        needs: [
+          '手鼓单独特写：正面或斜侧面，能看清鼓面与结构。',
+          '演奏动作画面：最好能看到人物手势和鼓的持握方式。',
+          '节庆或集体表演场景：用于说明它不是孤立器物，而是有使用情境。'
+        ],
+        aside: {
+          summary: '这一页现在能落下来的文字，主要来自“排瑶手鼓”展板资料，因此页面内容会更偏器物起源、工艺改良和当代发展。',
+          items: ['封面区适合放一张最有气势的画面。', '如果后续能补演奏动作，这一页会比现在更完整。', '目前资料更偏介绍器物本身，节庆使用场景仍适合继续补图。']
+        }
+      },
+      dye: {
+        title: '扎染',
+        nav: '扎染',
+        emoji: '🎨',
+        color: '#1A3A5C',
+        soft: '#e3ebf4',
+        badge: '靛蓝染艺',
+        summary: '扎染古称扎缬、绞缬，是中国民间传统染色工艺，也是我国古代三大印花技艺之一。',
+        coverImage: 'assets/dye-title.jpg',
+        coverText: '',
+        coverMode: 'full-bleed',
+        meta: ['扎缬工艺', '天然染液', '蓝白纹样'],
+        intro: '先说明它是什么，再讲清它怎么扎、怎么染、怎么显纹。',
+        cards: [
+          {
+            title: '从扎缬到扎染',
+            text: '扎染古称扎缬、绞缬，是中国民间传统而独特的染色工艺，也是我国古代三大印花技艺之一。这一页先从工艺本身展开，而不只把它当作一种颜色风格。',
+            image: 'assets/dye-poster.jpg',
+            alt: '扎染海报中的标题局部'
+          },
+          {
+            title: '先扎后染的形成逻辑',
+            text: '瑶族扎染不是直接涂色，而是先用白棉线在白棉布上依照花纹样进行针绣扎结、压挑，再把处理好的布料投入天然植物染液中反复煮染。正因为先有扎结和压挑，拆线之后才会保留下清晰的留白纹样。',
+            image: 'assets/zaran2.jpg',
+            alt: '扎染海报中的纹样与标题局部'
+          },
+          {
+            title: '蓝底白花的视觉完成',
+            text: '蓝色会在反复煮染中逐层加深，晾干拆线之后，布面形成白花蓝黑底的对比，纹样像自然长出来一样。真正能把这道工艺讲完整的，仍然是布料肌理、折痕和晕染层次都清楚的实物图。',
+            image: 'assets/zaran1.jpg',
+            alt: '扎染海报中的蓝白布面局部'
+          }
+        ]
+      },
+      embroider: {
+        title: '瑶绣',
+        nav: '瑶绣',
+        emoji: '🧵',
+        color: '#C23B22',
+        soft: '#f6e3dd',
+        badge: '纹样与针法',
+        summary: '瑶绣是瑶族妇女用手工在靛蓝色布面上进行挑花、正面刺绣形成的传统手工艺之一，已有一千余年历史。',
+        coverImage: 'assets/embroider-board.jpg',
+        coverText: '瑶绣以靛蓝底布、挑花、正面刺绣和延续千年的手工传统构成最鲜明的面貌，纹样、针脚和配色共同决定了它的辨识度。',
+        meta: ['靛蓝底布', '挑花刺绣', '千年手工'],
+        intro: '先让人看到纹样，再让人知道它怎么绣出来。',
+        cards: [
+          {
+            title: '靛蓝布上的针线工艺',
+            text: '瑶绣并不是在成衣上随手加花，而是以靛蓝色布面为底，用手工进行挑花和正面刺绣。也正因为底布颜色沉稳，图案的红、黄、粉、白才会更鲜明地跳出来。',
+            image: 'assets/embroider-hat.jpg',
+            alt: '绣有几何纹样的头饰细节'
+          },
+          {
+            title: '从近处看纹样',
+            text: '瑶绣很强调几何分格、花形重复和边框层层推进。观看重点落在针脚、色块和图案秩序上，比泛泛谈论更能看出这门手工艺的细致。',
+            image: 'assets/embroider-hang-2-16x9.jpg',
+            alt: '瑶绣挂卡上的几何纹样细节'
+          },
+          {
+            title: '延续至今的传统手工艺',
+            text: '瑶绣已有一千余年历史，是瑶族传统手工艺之一。它留下来的不只是图案本身，也是一整套通过手工将颜色、布料和纹样组织在一起的方式。',
+            image: 'assets/embroider-pattern-16x9.jpg',
+            alt: '瑶绣方形图案的刺绣细节'
+          }
+        ],
+        needs: [
+          '瑶绣图案近景：能清楚看到针脚和线色变化。',
+          '绣在服饰上的局部：如袖口、衣襟、背带或边饰。',
+          '手工制作画面：如果能拍到刺绣中的手部动作会更好。'
+        ],
+        aside: {
+          summary: '这一页现在的文字基础来自一张非常精炼的说明图，所以它更适合走“少写一点、看近一点”的路线。',
+          items: ['优先补近景，先别急着放大合影。', '标题可以短，图片要更细。', '如果后续只有一两张图，也优先给这页一张特写。']
+        }
+      },
+      dance: {
+        title: '长鼓舞',
+        nav: '长鼓舞',
+        emoji: '✨',
+        color: '#8B5A2B',
+        soft: '#f3e5d3',
+        badge: '动作与场面',
+        summary: '瑶族长鼓舞在 2008 年 6 月被列入第二批国家级非物质文化遗产代表性项目名录，是排瑶人民世代相传的民间传统舞蹈。',
+        coverImage: 'assets/dance-cover.jpg',
+        coverText: '长鼓舞常见于春节、三月三、十月十六盘王节、耍歌堂等喜庆场合。长鼓约四尺长，鼓身细长、两头较大，呈喇叭状，用沙桐木制成，两端蒙牛皮或羊皮作鼓面。',
+        meta: ['节庆舞蹈', '长鼓形制', '表演动作'],
+        intro: '先交代场合，再解释长鼓，最后回到舞步与气势。',
+        cards: [
+          {
+            title: '节庆中的长鼓舞',
+            text: '长鼓舞并不是孤立表演，而是和瑶族重要节庆与歌堂活动密切相关。这一页首先呈现的是它出现在哪里，再回到动作和鼓法本身。',
+            image: 'assets/dance-poster-crop-1.jpg',
+            alt: '长鼓舞海报中的人物与鼓面局部'
+          },
+          {
+            title: '长鼓与打法',
+            text: '长鼓的形制和打法也很鲜明：舞时长鼓横挂胸腹间，右手五指并拢，以掌拍鼓，左手持竹片敲打鼓面，能发出鲜明而有穿透力的节奏。表演形式则有单人舞、双人舞和群舞。',
+            image: 'assets/drum-scene.jpg',
+            alt: '长鼓舞海报中的长鼓与人物动作局部'
+          },
+          {
+            title: '刚劲粗犷的气质',
+            text: '长鼓舞的动作风格非常鲜明：舞蹈刚劲有力，粗犷洒脱，时而腾空旋转，时而如猛虎扑地。尤其双人表演，常被形容为两虎相斗、双龙戏珠，把瑶族人民勤劳勇敢、雄劲刚强的性格表现得淋漓尽致。',
+            image: 'assets/长鼓舞1.jpg',
+            alt: '长鼓舞海报中的动态造型局部'
+          }
+        ],
+        needs: [
+          '长鼓舞全景：能看见队形和多人动作。',
+          '人物动作中景：看得见鼓与身体关系。',
+          '现场氛围画面：如果有围观或节庆背景，会更完整。'
+        ],
+        aside: {
+          summary: '长鼓舞这页目前的文字来源比较完整，既有入遗信息，也有鼓的形制、演法和动作风格，因此很适合做成最有现场感的一页。',
+          items: ['封面建议优先选多人场景。', '正文中至少保留一段专门写动作。', '如果能补到连续动作图，这一页会最好看。']
+        }
+      },
+      life: {
+        title: '当地特色',
+        nav: '当地特色',
+        emoji: '🛍️',
+        color: '#D4A017',
+        soft: '#FBF2D9',
+        badge: '瑶山风物',
+        summary: '瑶山田埂山山孕育出独具特色的风物，从南瓜面、丝苗米、花生油到草本洗护，每一份都带着瑶山的山水气息。',
+        coverImage: 'assets/specialty-grape.jpg',
+        coverText: '从田间到餐桌，再从草本到日常洗护，把山里的味道与手艺完整保留下来。',
+        meta: ['瑶山风物', '米面粮油', '草本洗护'],
+        intro: '先看主食与粮油，再看鲜果特产与草本工艺。',
+        cards: [
+          {
+            title: '南瓜面：一碗瑶山风味',
+            text: '以瑶山自种南瓜与小麦粉调和制成，汤色金黄、面条筋道，是瑶山风物中最具代表性的特产伴手礼之一。',
+            image: 'assets/specialty-pumpkin-noodle.png',
+            alt: '南瓜面礼盒包装'
+          },
+          {
+            title: '丝苗米：田埂山山，十里稻香',
+            text: '产自瑶山梯田的丝苗米，米粒细长、米香浓郁，煮出的饭软滑有嚼劲，是瑶家人餐桌上最日常的主食。',
+            image: 'assets/specialty-rice.png',
+            alt: '丝苗米袋装包装'
+          },
+          {
+            title: '花生油：古法压榨的香浓',
+            text: '古法压榨的花生油色泽金黄、香气浓郁，承载着瑶山农户代代相传的榨油手艺，香浓好滋味，健康每一天。',
+            image: 'assets/specialty-peanut-oil.jpg',
+            alt: '花生油瓶身'
+          },
+          {
+            title: '排瑶葡萄：三果同盒，鲜摘直达',
+            text: '生长在高山果园的排瑶葡萄，皮薄肉脆、入口香浓，三果同盒、鲜摘直达，是节日送礼与日常尝鲜都合适的选择。',
+            image: 'assets/specialty-grape.jpg',
+            alt: '排瑶葡萄礼盒'
+          },
+          {
+            title: '植露草本：山中草本洗护',
+            text: '瑶族自古善用山中草本，植露草本原浆洗护系列以本地草药为基底，温和滋养，把瑶山的草木气息带进日常。',
+            image: 'assets/specialty-herbal-shop.jpg',
+            alt: '植露草本洗护产品店铺'
+          },
+          {
+            title: '米面晾晒：竹竿上的传统',
+            text: '长长的米面挂在竹竿上自然晾晒，阳光和山风慢慢带走水分，也把米香一点点锁进面身，是瑶寨常见的风物场景。',
+            image: 'assets/specialty-noodle-drying.jpg',
+            alt: '竹竿上晾晒的米面'
+          },
+          {
+            title: '腐竹制作：木槽里的手艺',
+            text: '豆香浓郁的腐竹沿用木槽手工制作的传统工艺，从磨浆、煮浆到挑皮、晾晒全靠手上功夫，是瑶山豆制品的代表。',
+            image: 'assets/specialty-tofu-workshop.jpg',
+            alt: '腐竹制作作坊'
+          }
+        ],
+        needs: [
+          '各产品如能补到食用或使用中的场景画面，页面会更生动。',
+          '封面目前用葡萄礼盒图，若想换成晾晒大场景也可直接替换。'
+        ],
+        aside: {
+          summary: '这一页的图片与文字均来自八张实地拍摄的产品图，按"主食粮油 / 鲜果特产 / 草本工艺"分组展开，一图一事。',
+          items: ['封面与首页缩略图选用葡萄礼盒，视觉冲击最强。', '七张卡片每个产品一张图，顺序可按需调整。', '尚有一张备用图（specialty-extra.png）未上页面，需要时替换任意卡片即可。']
+        }
+      }
+    };
+
+    const homeModules = [
+      {
+        id: 'village',
+        title: '千年瑶寨',
+        summary: '始建于宋代，依山而建，至今仍保留大量明清古建筑。',
+        emoji: '⛰️',
+        color: '#6F8E58',
+        soft: '#e8f0df',
+        image: 'assets/village-street.jpg'
+      },
+      {
+        id: 'drum',
+        title: '瑶族手鼓',
+        summary: '起源于排瑶长鼓，在传统外形上改良出独特音色与品类。',
+        emoji: '🥁',
+        color: '#C0723C',
+        soft: '#f5e6dc',
+        image: 'assets/drum-close.jpg'
+      },
+      {
+        id: 'dye',
+        title: '扎染',
+        summary: '以扎结与反复煮染形成蓝底白花，是页面中最鲜明的染织主题之一。',
+        emoji: '🎨',
+        color: '#1A3A5C',
+        soft: '#e3ebf4',
+        image: 'assets/dye-title.jpg'
+      },
+      {
+        id: 'embroider',
+        title: '瑶绣',
+        summary: '靛蓝布上的挑花与正面刺绣，是延续千余年的传统手工艺。',
+        emoji: '🧵',
+        color: '#C23B22',
+        soft: '#f6e3dd',
+        image: 'assets/embroider-hat.jpg'
+      },
+      {
+        id: 'dance',
+        title: '长鼓舞',
+        summary: '国家级非遗项目，在节庆与歌堂场合中最能展现瑶寨气势。',
+        emoji: '✨',
+        color: '#8B5A2B',
+        soft: '#f3e5d3',
+        image: 'assets/dance-cover.jpg'
+      },
+      {
+        id: 'life',
+        title: '当地特色',
+        summary: '从米面粮油到草本洗护，瑶山田埂孕育出的特色风物一览。',
+        emoji: '🛍️',
+        color: '#D4A017',
+        soft: '#FBF2D9',
+        image: 'assets/specialty-grape.jpg'
+      }
+    ];
+
+    const navLinks = [...document.querySelectorAll('.nav-link')];
+    const featureGrid = document.getElementById('feature-grid');
+    const homeView = document.getElementById('home-view');
+    const detailView = document.getElementById('detail-view');
+    const detailTitle = document.getElementById('detail-title');
+    const detailSummary = document.getElementById('detail-summary');
+    const detailCover = document.getElementById('detail-cover');
+    const detailCoverMedia = document.getElementById('detail-cover-media');
+    const detailBadge = document.getElementById('detail-badge');
+    const detailCoverTitle = document.getElementById('detail-cover-title');
+    const detailCoverText = document.getElementById('detail-cover-text');
+    const detailMetaRow = document.getElementById('detail-meta-row');
+    const detailList = document.getElementById('detail-list');
+    const overlay = document.getElementById('transition-overlay');
+    const canvas = document.getElementById('transition-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let activePage = 'home';
+    let isTransitioning = false;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth * window.devicePixelRatio;
+      canvas.height = window.innerHeight * window.devicePixelRatio;
+      ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function renderHome() {
+      featureGrid.innerHTML = homeModules.map((item, index) => `
+        <button
+          class="feature-card"
+          type="button"
+          data-target="${item.id}"
+          ${item.disabled ? 'data-disabled="true"' : ''}
+          style="--theme:${item.color}; --soft:${item.soft};"
+        >
+          <div class="feature-top">
+            <div class="feature-emoji">${item.emoji}</div>
+            <div class="feature-index">${String(index + 1).padStart(2, '0')}</div>
+          </div>
+          <div class="feature-thumb ${item.image ? 'has-image' : ''}" aria-hidden="true">
+            ${item.image ? `<img class="${item.imageClass || ''}" src="${item.image}" alt="" loading="lazy">` : ''}
+          </div>
+          <h3>${item.title}</h3>
+          ${item.summary ? `<p>${item.summary}</p>` : ''}
+        </button>
+      `).join('');
+
+      featureGrid.querySelectorAll('.feature-card').forEach((card) => {
+        card.addEventListener('click', (event) => {
+          const id = card.dataset.target;
+          if (card.dataset.disabled === 'true') {
+            return;
+          }
+          openDetail(id, card, event);
+        });
+      });
+    }
+
+    function renderDetail(id) {
+      const data = detailData[id];
+      if (!data) {
+        return;
+      }
+
+      detailView.style.setProperty('--theme', data.color);
+      detailView.style.setProperty('--soft', data.soft);
+      detailTitle.textContent = data.title;
+      detailSummary.textContent = data.summary;
+      detailBadge.textContent = data.badge;
+      detailCoverTitle.textContent = data.title;
+      detailCoverText.textContent = data.coverText;
+      detailCover.classList.toggle('has-image', Boolean(data.coverImage));
+      detailCover.classList.toggle('media-focus', data.coverMode === 'image-priority');
+      detailCover.classList.toggle('full-bleed', data.coverMode === 'full-bleed');
+      detailCoverMedia.style.backgroundImage = data.coverImage ? `url("${data.coverImage}")` : 'none';
+      detailView.classList.toggle('theme-village', id === 'village');
+      detailSummary.style.display = data.summary ? '' : 'none';
+      detailBadge.style.display = data.badge ? '' : 'none';
+      detailCoverText.style.display = data.coverText ? '' : 'none';
+
+      detailMetaRow.innerHTML = data.meta.filter(Boolean).map((tag) => `
+        <span class="meta-chip">${tag}</span>
+      `).join('');
+
+      detailList.innerHTML = data.cards.map((card, index) => {
+        const fallbackImage = id === 'dye' && index === 0 ? data.coverImage : '';
+        const cardImage = card.image || fallbackImage;
+        const cardAlt = card.alt || card.title || data.title;
+        const cardImageClass = card.imageClass || '';
+
+        return `
+        <article class="detail-card">
+          <div class="detail-card-head">
+            <span class="detail-index">0${index + 1}</span>
+            ${data.badge ? `<span class="meta-chip">${data.badge}</span>` : ''}
+          </div>
+          <div class="detail-placeholder ${cardImage ? 'has-image' : ''}" aria-hidden="true">
+            ${cardImage ? `<img class="${cardImageClass}" src="${cardImage}" alt="${cardAlt}" loading="lazy">` : ''}
+          </div>
+          ${card.title ? `<h3>${card.title}</h3>` : ''}
+          ${card.text ? `<p>${card.text}</p>` : ''}
+        </article>
+      `;
+      }).join('');
+    }
+
+    function updateNav(page) {
+      navLinks.forEach((link) => {
+        const target = link.dataset.target;
+        const data = detailData[target];
+        const isActive = target === page || (page === 'home' && target === 'home');
+        link.classList.toggle('active', isActive);
+        const accent = data?.color || '#ffffff';
+        if (isActive) {
+          link.style.setProperty('--nav-accent', accent);
+        } else {
+          link.style.removeProperty('--nav-accent');
+        }
+      });
+    }
+
+    function switchView(page) {
+      const isHome = page === 'home';
+      homeView.classList.toggle('active', isHome);
+      detailView.classList.toggle('active', !isHome);
+      activePage = page;
+      updateNav(page);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    function drawSolidBurstFrame(progress, x, y, color) {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const maxRadius = Math.hypot(Math.max(x, width - x), Math.max(y, height - y)) + 56;
+      const radius = maxRadius * (1 - Math.pow(1 - progress, 2.2));
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(x, y, Math.max(radius, 0.01), 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function runTransition({ x, y, color, onMidpoint, onComplete }) {
+      if (isTransitioning) {
+        return;
+      }
+      isTransitioning = true;
+      overlay.classList.add('active');
+      overlay.style.background = 'transparent';
+      const duration = 620;
+      const start = performance.now();
+      let midpointDone = false;
+
+      function frame(now) {
+        const raw = Math.min((now - start) / duration, 1);
+        const burstPhase = Math.min(raw / 0.62, 1);
+        const fadePhase = raw <= 0.62 ? 1 : 1 - ((raw - 0.62) / 0.38);
+        drawSolidBurstFrame(burstPhase, x, y, color);
+        overlay.style.opacity = String(Math.max(0, Math.min(1, fadePhase)));
+
+        if (raw >= 0.46 && !midpointDone) {
+          midpointDone = true;
+          onMidpoint?.();
+        }
+
+        if (raw < 1) {
+          requestAnimationFrame(frame);
+          return;
+        }
+
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        overlay.classList.remove('active');
+        overlay.style.background = 'transparent';
+        overlay.style.opacity = '';
+        isTransitioning = false;
+        onComplete?.();
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    function openDetail(id, trigger, event) {
+      const data = detailData[id];
+      if (!data || isTransitioning) {
+        return;
+      }
+      const rect = trigger.getBoundingClientRect();
+      const x = event?.clientX ?? rect.left + rect.width / 2;
+      const y = event?.clientY ?? rect.top + rect.height / 2;
+      runTransition({
+        x,
+        y,
+        color: data.color,
+        onMidpoint: () => {
+          renderDetail(id);
+          switchView(id);
+          history.replaceState(null, '', `#${id}`);
+        }
+      });
+    }
+
+    function openHome(trigger, color) {
+      if (isTransitioning) {
+        return;
+      }
+      const rect = trigger?.getBoundingClientRect?.() || { left: window.innerWidth / 2, top: 88, width: 0, height: 0 };
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      runTransition({
+        x,
+        y,
+        color: color || (detailData[activePage]?.color || '#6C8A43'),
+        onMidpoint: () => {
+          switchView('home');
+          history.replaceState(null, '', '#home');
+        }
+      });
+    }
+
+    document.getElementById('back-home').addEventListener('click', (event) => {
+      openHome(event.currentTarget, detailData[activePage]?.color);
+    });
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const target = link.dataset.target;
+        if (target === activePage) {
+          return;
+        }
+        if (target === 'home') {
+          openHome(link, detailData[activePage]?.color);
+          return;
+        }
+        const data = detailData[target];
+        if (!data) {
+          return;
+        }
+        openDetail(target, link, event);
+      });
+    });
+
+    renderHome();
+
+    const initialHash = window.location.hash.replace('#', '');
+    if (detailData[initialHash]) {
+      renderDetail(initialHash);
+      switchView(initialHash);
+    } else {
+      switchView('home');
+      history.replaceState(null, '', '#home');
+    }
+  </script>
+</body>
+</html>
